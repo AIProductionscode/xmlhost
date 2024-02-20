@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="student"></div>
+    <script>
+        const student = document.getElementById("student");
+
+        fetch('https://xmlhost.vercel.app/Class.xml')
+        .then(response => response.text())
+        .then(data => {
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(data, 'application/xml');
+            //Process xmlDoc as needed
+
+            student.textContent = xmlDoc.getElementsByTagName('firststudent')[0].childNodes[0].nodeValue;
+            console.log(xmlDoc);
+
+        })
+        .catch(error => console.error('Error Loading XML:', error))
+
+    </script>
+</body>
+</html>

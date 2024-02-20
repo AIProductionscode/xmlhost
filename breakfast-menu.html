@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Transformation</title>
+    <script>
+        var xmlFile = 'food.xml';
+        var xsltFile = 'style.xsl';
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                //4 for ready state is okay
+                //200 for status is okay
+                var xmlDoc = this.responseXML;
+                //responseXML gives the content as it's xml format 
+                //responseTEXT give the content as text 
+                console.log(xmlDoc)
+
+                var xslthttp = new XMLHttpRequest();
+                xslthttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        var xsltProcessor = new XMLHttpRequest();
+                        xsltProcessor.importStylesheet(this.responseXML);
+
+                        var resultDocument = xsltProcessor.transformToDocument(xmlDoc);
+
+                        //Get the transformed content as string
+                        var transformedString = new XMLSerializer().serializeToString(resultDocument);
+
+                        //Update the body of the HTML document with the transformed content
+                        document.body.innerHTML = transformedString;
+                    }
+                };
+                xslthttp.open('GET', xsltFile, true );
+                xslthttp.send();
+            }
+        };
+        xmlhttp.open('GET', xmlFile, true );
+        xmlhttp.send();
+
+    </script>
+</head>
+<body>
+</body>
+</html>
