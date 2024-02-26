@@ -1,0 +1,16 @@
+{
+    "name": "David Osihmen",
+    "age": 24,
+    "sex": "Male",
+    "courses": [
+        {"type": "Arts", "focus": "Real-life environments"}, 
+        {"type": "Science", "focus": "Scientific Stuff"}
+    ],
+    "faculty": {
+        "first": {"name": "Kone", "height": "6ft"},
+        "second": {"name": "Dave", "height": "7ft"}
+    },
+    
+    "height": "5'9ft",
+    "program": "Part-time"
+}
